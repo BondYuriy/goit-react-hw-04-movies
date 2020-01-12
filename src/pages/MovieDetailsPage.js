@@ -28,6 +28,9 @@ export default class MovieDetailsPage extends Component {
     }).isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
+      location: PropTypes.shape({
+        state: PropTypes.shape({}),
+      }).isRequired,
     }).isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
@@ -60,7 +63,7 @@ export default class MovieDetailsPage extends Component {
 
   render() {
     const { movie } = this.state;
-    const { location } = this.props;
+    const { history } = this.props;
 
     return (
       <div>
@@ -90,7 +93,7 @@ export default class MovieDetailsPage extends Component {
                   <Link
                     to={{
                       pathname: `${routes.MOVIES}/${movie.id}/cast`,
-                      state: { from: location },
+                      state: history.location.state,
                     }}
                   >
                     Cast
@@ -100,7 +103,7 @@ export default class MovieDetailsPage extends Component {
                   <Link
                     to={{
                       pathname: `${routes.MOVIES}/${movie.id}/reviews`,
-                      state: { from: location },
+                      state: history.location.state,
                     }}
                   >
                     Reviews
